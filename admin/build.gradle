@@ -1,0 +1,17 @@
+dependencies {
+    implementation project(':core')
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+
+    testImplementation project(':api')
+    testImplementation project(':core')
+    testImplementation project(':consumer')
+}
+
+bootJar {
+    archiveBaseName = 'admin-api'
+}
+test {
+    testLogging.exceptionFormat 'full'
+    testLogging.events 'passed', 'skipped', 'failed'
+}

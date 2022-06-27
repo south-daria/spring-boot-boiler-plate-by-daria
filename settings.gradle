@@ -1,0 +1,6 @@
+rootProject.name = 'JavaTemplateByDaria'
+include 'api'
+include 'admin'
+include 'consumer'
+include 'core'
+

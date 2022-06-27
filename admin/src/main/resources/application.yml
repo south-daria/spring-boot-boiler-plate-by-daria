@@ -1,0 +1,14 @@
+# default profile
+spring:
+  profiles:
+    include:
+      - httpclient
+    active: development
+server:
+  port: 822
+  tomcat:
+    connection-timeout: 30000
+    max-threads: 100
+    min-spare-threads: 50
+    accept-count: 50
+    uri-encoding: UTF-8
