@@ -1,0 +1,16 @@
+plugins {
+    id "org.flywaydb.flyway" version "6.5.7"
+}
+
+dependencies {
+    implementation project(':core')
+    implementation 'org.flywaydb:flyway-core:6.5.7'
+}
+
+
+// default flyway configuration : local
+flyway {
+    url = 'jdbc:mysql://localhost:3306/test?'
+    user = 'root'
+    password = 'yun1109114'
+}
