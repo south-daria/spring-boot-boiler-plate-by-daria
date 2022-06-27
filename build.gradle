@@ -1,126 +1,155 @@
-// 빌드 시
-buildscript {
-    //ext 라는 키워드는 build.gradle 에서 사용하는 전역변수를 설정하겠다는 의미
-    ext {
-        springBootVersion = '2.2.1.RELEASE'
-        querydslPluginVersion = '1.0.10'
-    }
-    repositories {
-        mavenCentral()
-        maven {
-            url "https://plugins.gradle.org/m2/"
-            uri ("https://jitpack.io")
-        } // plugin 저장소
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-        classpath "io.spring.gradle:dependency-management-plugin:1.0.8.RELEASE"
-        classpath("gradle.plugin.com.ewerk.gradle.plugins:querydsl-plugin:${querydslPluginVersion}")
+plugins {
+    id 'org.springframework.boot' version '2.6.6'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'io.franzbecker.gradle-lombok' version '5.0.0'
+    id 'java'
+    id 'java-library'
+    id 'idea'
+    id 'application'
+    id 'distribution'
+}
+
+ext {
+    set('springCloudVersion', '2021.0.1')
+    set('lombokVersion', '5.0.0')
+    set('querydslVersion', '5.0.0')
+    set('awsJavaSdkVersion', '1.12.186')
+    set('apacheCommonsVersion', '3.12.0')
+    set('springdocOpenapiUIVersion', '1.6.6')
+    set('logbackVersion', '1.2.9')
+    set('mapStructVersion', '1.4.2.Final')
+    set('awsSecretManagerVersion', '2.4.1')
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
     }
 }
 
-/* 전체 프로젝트 내 전체 모듈 공통설정 */
+bootJar {
+    enabled = false
+}
+
 allprojects {
-    // root 프로젝트까지 설정이 필요한 경우 사용
-}
+    group = 'com.daria.javatemplate'
+    version = '0.0.1'
 
-/* 하위 프로젝트 내 전체 모듈 공통설정 */
-subprojects {
-    group 'com.southjy'
-
-    // 아래 4개는 자바와 스프링부트를 사용 하기 위한 필수 플러그인
-    apply plugin: 'java'
-    apply plugin: 'idea'
-    apply plugin: 'org.springframework.boot'
-    apply plugin: 'io.spring.dependency-management' //의존성들 괸리해주는 플러그인 필수
-
-    //어떤 원격 저장소 에서 받을지 정함
     repositories {
+        mavenLocal()
+        maven { url "https://repo.spring.io/milestone" }
         mavenCentral()
     }
+}
 
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
+subprojects { subproject ->
+    apply plugin: 'java'
+    apply plugin: "java-library"
+    apply plugin: "io.franzbecker.gradle-lombok"
+    apply plugin: 'idea'
+    apply plugin: 'application'
+    apply plugin: 'distribution'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
 
-    compileJava.options.encoding = 'UTF-8'
-    javadoc {
-        options.charSet = 'UTF-8'
-    }
-
-    ext {
-        springBootVersion = '2.2.1.RELEASE'
-    }
-
-    // 멀티모듈에서 공통으로 사용될 의존성만 추가
-    dependencies {
-        implementation 'org.slf4j:slf4j-api'
-        implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
-        compileOnly 'org.projectlombok:lombok'
-        testCompileOnly 'org.projectlombok:lombok'
-        testAnnotationProcessor "org.projectlombok:lombok:1.18.10"
-        implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
-        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-        implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-        implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-        implementation 'org.springframework.boot:spring-boot-starter-security'
-        implementation 'org.springframework.boot:spring-boot-starter-web'
-        implementation 'org.flywaydb:flyway-core'
-        implementation 'org.springframework.kafka:spring-kafka'
-        compileOnly 'org.projectlombok:lombok'
-        implementation 'org.springframework.boot:spring-boot-devtools'
-        runtimeOnly 'mysql:mysql-connector-java'
-        annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-        annotationProcessor 'org.projectlombok:lombok'
-        testImplementation 'org.springframework.boot:spring-boot-starter-test'
-        testImplementation 'org.springframework.kafka:spring-kafka-test'
-        testImplementation 'org.springframework.security:spring-security-test'
-    }
-
-
-    // sub-project 등록시 디렉토리가 존재하지 않으면 자동생성
-    task initSourceFolders {
-        sourceSets*.java.srcDirs*.each {
-            if (!it.exists()) {
-                it.mkdirs()
-            }
-        }
-        sourceSets*.resources.srcDirs*.each {
-            if (!it.exists()) {
-                it.mkdirs()
-            }
+    configurations {
+        developmentOnly
+        runtimeClasspath {
+            extendsFrom developmentOnly
         }
     }
-}
 
-// 각 프로젝트에서만 사용하는 의존성 추가
-project(':core') {
+    plugins.withType(JavaPlugin) {
 
-    // core 에서는 bootjar로 패키징 할 필요가 없으므로 추가
-    bootJar.enabled = false
-    jar.enabled = true
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
 
-    dependencies {
-    }
-}
+        compileJava {
+            options.encoding = 'UTF-8'
+            options.compilerArgs << "-Xlint"
+        }
 
-project(':consumer') {
-    dependencies {
-        // 컴파일시 core 모듈을 가져온다.
-        compileOnly project(':core')
-        implementation 'org.springframework.boot:spring-boot-starter-web'
-    }
-}
+        idea {
+            module {
+                outputDir = file("$buildDir/classes/main/")
+                testOutputDir file("$buildDir/classes/test")
+                downloadSources = true
+            }
+        }
 
-project(':admin') {
-    dependencies {
-        compileOnly project(':core')
-        implementation 'org.springframework.boot:spring-boot-starter-web'
-    }
-}
+        dependencyManagement {
+            imports {
+                mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+            }
+        }
 
-project(':api') {
-    dependencies {
-        compileOnly project(':core')
-        implementation 'org.springframework.boot:spring-boot-starter-web'
+        dependencies {
+
+            // for spring web
+            implementation('org.springframework.boot:spring-boot-starter-web') {
+                exclude module: 'spring-boot-starter-tomcat'
+            }
+            implementation('org.springframework.boot:spring-boot-starter-undertow')
+            implementation 'org.springframework.boot:spring-boot-starter-webflux'
+            implementation 'org.projectreactor:reactor-spring:1.0.1.RELEASE'
+
+            // for security
+            implementation 'org.springframework.boot:spring-boot-starter-security'
+
+            // for api
+            implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+
+            // for project managing, monitoring
+            implementation 'org.springframework.boot:spring-boot-starter-actuator'
+            implementation 'com.datadoghq:dd-trace-api:0.100.0'
+            implementation 'io.opentracing:opentracing-util:0.33.0'
+
+            // for validation
+            implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+            // for database, cache
+            implementation 'mysql:mysql-connector-java:8.0.28'
+            implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+            implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+            implementation 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
+
+            // for aws
+            implementation "io.awspring.cloud:spring-cloud-starter-aws-secrets-manager-config:${awsSecretManagerVersion}"
+
+            // for apache commons
+            implementation 'org.apache.commons:commons-lang3:3.12.0'
+            implementation 'org.apache.commons:commons-collections4:4.4'
+            implementation 'org.apache.commons:commons-pool2:2.11.1'
+
+            // for documentation
+            implementation "org.springdoc:springdoc-openapi-ui:${springdocOpenapiUIVersion}"
+
+            // for google
+            implementation 'com.google.guava:guava:31.1-jre'
+
+            // for logging
+            implementation "ch.qos.logback:logback-classic:${logbackVersion}"
+            implementation "ch.qos.logback:logback-access:${logbackVersion}"
+            implementation "ch.qos.logback:logback-core:${logbackVersion}"
+
+            // for kafka
+            implementation 'org.springframework.kafka:spring-kafka'
+            testImplementation 'org.springframework.kafka:spring-kafka-test'
+
+            // for lombok
+            compileOnly 'org.projectlombok:lombok'
+            annotationProcessor 'org.projectlombok:lombok'
+
+            // for mapper : mapstruct는 반드시 lombok 이후에 선언되어야 함.
+            implementation "org.mapstruct:mapstruct:${mapStructVersion}"
+            annotationProcessor "org.mapstruct:mapstruct-processor:${mapStructVersion}"
+
+            developmentOnly 'org.springframework.boot:spring-boot-devtools'
+            testImplementation 'org.springframework.boot:spring-boot-starter-test'
+            testImplementation 'io.projectreactor:reactor-test'
+            testImplementation 'org.springframework.security:spring-security-test'
+
+            testImplementation 'com.drewnoakes:metadata-extractor:2.16.0'
+        }
     }
 }
