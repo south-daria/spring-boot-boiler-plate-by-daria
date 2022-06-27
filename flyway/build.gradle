@@ -12,5 +12,5 @@ dependencies {
 flyway {
     url = 'jdbc:mysql://localhost:3306/test?'
     user = 'root'
-    password = 'yun1109114'
+    password = ''
 }
