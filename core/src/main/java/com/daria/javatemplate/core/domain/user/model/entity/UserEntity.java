@@ -1,5 +1,6 @@
 package com.daria.javatemplate.core.domain.user.model.entity;
 
+import com.daria.javatemplate.core.common.model.entity.BaseTimeEntity;
 import com.daria.javatemplate.core.domain.user.type.UserRole;
 import com.daria.javatemplate.core.domain.user.type.UserStatus;
 import lombok.Getter;
@@ -7,13 +8,14 @@ import lombok.Setter;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Getter
 @Setter
 @Entity
 @DynamicUpdate
 @Table(name = "user")
-public class UserEntity {
+public class UserEntity extends BaseTimeEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id", columnDefinition = "회원 번호")

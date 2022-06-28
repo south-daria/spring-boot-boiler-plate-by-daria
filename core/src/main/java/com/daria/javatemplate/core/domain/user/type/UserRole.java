@@ -1,7 +1,6 @@
 package com.daria.javatemplate.core.domain.user.type;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+
 import org.springframework.security.core.GrantedAuthority;
 
 public enum UserRole implements GrantedAuthority {
