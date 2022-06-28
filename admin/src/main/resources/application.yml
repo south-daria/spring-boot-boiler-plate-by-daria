@@ -7,7 +7,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/test
     username: root
-    password:
+    password: 
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     show-sql: true
@@ -24,4 +24,9 @@ server:
     min-spare-threads: 50
     accept-count: 50
     uri-encoding: UTF-8
+
+## Security
+security:
+  permit-url: /api-docs/**,/configuration/**,/webjars/**,/health
+  filter-skip: /health,/configuration,/webjars
 
