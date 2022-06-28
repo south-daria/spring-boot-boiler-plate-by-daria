@@ -5,7 +5,10 @@ DROP TABLE IF EXISTS `user`;
  SET character_set_client = utf8mb4;
 CREATE TABLE `user` (
   `user_id` bigint NOT NULL AUTO_INCREMENT COMMENT '회원 번호',
+  `email` bigint NOT NULL UNIQUE COMMENT '회원 이메일',
+  `upwd` bigint NOT NULL COMMENT '회원 비밀번호',
   `status` varchar(30) NOT NULL COMMENT '회원 상태',
+  `user_role` varchar(30) NOT NULL COMMENT '회원 권한',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '등록일시',
   `updated_at` datetime NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '수정일시',
   PRIMARY KEY (`user_id`)
