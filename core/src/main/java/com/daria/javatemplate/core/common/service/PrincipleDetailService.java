@@ -1,6 +1,6 @@
 package com.daria.javatemplate.core.common.service;
 
-import com.daria.javatemplate.core.common.config.PrincipleDetail;
+import com.daria.javatemplate.core.security.config.PrincipleDetail;
 import com.daria.javatemplate.core.domain.user.model.entity.UserEntity;
 import com.daria.javatemplate.core.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

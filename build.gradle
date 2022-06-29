@@ -93,8 +93,12 @@ subprojects { subproject ->
             implementation 'org.springframework.boot:spring-boot-starter-webflux'
             implementation 'org.projectreactor:reactor-spring:1.0.1.RELEASE'
 
+            //for Test
+            implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
             // for security
             implementation 'org.springframework.boot:spring-boot-starter-security'
+            implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 
             // for api
             implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'

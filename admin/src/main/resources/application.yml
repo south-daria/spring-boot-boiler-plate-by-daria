@@ -3,7 +3,21 @@ spring:
   profiles:
     include:
       - httpclient
+      - oauth
     active: development
+    ## Security
+  security:
+    permit-url: /api-docs/**,/configuration/**,/webjars/**,/health
+    filter-skip: /health,/configuration,/webjars
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 469809305775-ksbip6mp90st3ob5t2ddk50edth3j4md.apps.googleusercontent.com
+            client-secret: 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
+            scope:
+              - profile
+              - email
   datasource:
     url: jdbc:mysql://localhost:3306/test
     username: root
@@ -24,9 +38,3 @@ server:
     min-spare-threads: 50
     accept-count: 50
     uri-encoding: UTF-8
-
-## Security
-security:
-  permit-url: /api-docs/**,/configuration/**,/webjars/**,/health
-  filter-skip: /health,/configuration,/webjars
-
