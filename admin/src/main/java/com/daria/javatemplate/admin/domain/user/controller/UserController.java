@@ -3,6 +3,7 @@ package com.daria.javatemplate.admin.domain.user.controller;
 import com.daria.javatemplate.admin.domain.user.service.UserAdminService;
 import com.daria.javatemplate.core.domain.user.model.dto.UserDTO;
 import com.daria.javatemplate.core.domain.user.model.entity.UserEntity;
+import com.daria.javatemplate.core.domain.user.model.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -16,12 +17,14 @@ public class UserController {
 
     private final UserAdminService userService;
 
+    private final UserMapper userMapper;
+
     @PostMapping()
-    public ResponseEntity<UserEntity> createUser(
+    public ResponseEntity<UserDTO> createUser(
             @RequestBody UserDTO userDto
     ) {
         UserEntity userEntity = userService.createUser(userDto);
-        return ResponseEntity.ok(userEntity);
+        return ResponseEntity.ok(userMapper.toDto(userEntity));
     }
 
     @GetMapping()

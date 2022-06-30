@@ -19,6 +19,7 @@ public enum ApplicationErrorType {
     INVALID_VALIDATION_CODE(HttpStatus.BAD_REQUEST, -15000, "try.again"),
     INVALID_REQUEST_TO_ROOT_VIEW(HttpStatus.BAD_REQUEST, -10004, "try.again"/*클라이언트에서 Root View 로 이동*/),
     CLIENT_ABORT(HttpStatus.BAD_REQUEST, -10005, "try.again"),
+    ALREADY_ACCOUNT(HttpStatus.BAD_REQUEST, -10006, "이미 가입된 이메일입니다. 일반 로그인해주세요"),
 
     /**
      * Maintenance Mode (-99999)
