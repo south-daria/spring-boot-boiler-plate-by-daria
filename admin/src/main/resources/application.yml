@@ -13,14 +13,14 @@ spring:
       client:
         registration:
           google:
-            client-id: 469809305775-ksbip6mp90st3ob5t2ddk50edth3j4md.apps.googleusercontent.com
-            client-secret: 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
+            client-id: <client-id>
+            client-secret: <serect-key>
             scope:
               - profile
               - email
           naver:
-            client-id: we5O8JJCsiLuKFAEQkHi
-            client-secret: wxhEiwc5mJ
+            client-id: <client-id>
+            client-secret: <serect-key>
             scope:
               - profile
               - email
@@ -37,7 +37,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/test
     username: root
-    password: yun1109114
+    password: 
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     show-sql: true
