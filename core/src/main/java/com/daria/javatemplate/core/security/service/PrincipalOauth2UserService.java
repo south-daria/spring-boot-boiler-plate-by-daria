@@ -1,7 +1,7 @@
 package com.daria.javatemplate.core.security.service;
 
-import com.daria.javatemplate.core.common.exception.ApplicationErrorType;
-import com.daria.javatemplate.core.common.exception.SilentApplicationErrorException;
+import com.daria.javatemplate.core.common.exception.AdminErrorType;
+import com.daria.javatemplate.core.common.exception.SilentAdminErrorException;
 import com.daria.javatemplate.core.domain.user.model.dto.UserDTO;
 import com.daria.javatemplate.core.domain.user.model.entity.UserEntity;
 import com.daria.javatemplate.core.domain.user.model.mapper.UserMapper;
@@ -19,6 +19,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -35,10 +36,26 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User auth2User = super.loadUser(userRequest);
-        String fullProvider = userRequest.getClientRegistration().getClientId();
-        UserProvider provider = fullProvider.contains("google") ? UserProvider.GOOGLE : UserProvider.UNKNOWN;
-        String providerId = auth2User.getAttribute("sub");
-        String email = auth2User.getAttribute("email");
+        String fullProvider = userRequest.getClientRegistration().getRegistrationId();
+        UserProvider provider;
+        try{
+            provider = UserProvider.valueOf(fullProvider.toUpperCase());
+        } catch (Exception e){
+            provider = UserProvider.UNKNOWN;
+        }
+        String providerId;
+        String email;
+        if(UserProvider.GOOGLE.equals(provider)){
+            providerId = auth2User.getAttribute("sub");
+            email = auth2User.getAttribute("email");
+        } else if (UserProvider.NAVER.equals(provider)){
+            Map<String, String> response = auth2User.getAttribute("response");
+            providerId = response.get("id");
+            email = response.get("email");
+        } else {
+            throw new SilentAdminErrorException(AdminErrorType.UNKNOWN_USER);
+        }
+
         UserEntity userEntity = userService.getUser(email);
         // 유저 데이터가 없을 경우 회원가입
         if (userEntity == null) {

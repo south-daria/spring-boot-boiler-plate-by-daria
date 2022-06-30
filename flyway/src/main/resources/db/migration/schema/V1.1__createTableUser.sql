@@ -10,7 +10,7 @@ CREATE TABLE `user` (
   `status` varchar(30) NOT NULL DEFAULT 'ACTIVE' COMMENT '회원 상태',
   `user_role` varchar(30) NOT NULL DEFAULT 'USER' COMMENT '회원 권한',
   `provider` varchar(30) NOT NULL DEFAULT 'IFSELF' COMMENT 'provider(IFSELF, GOOGLE, KAKAO, NAVER)',
-  `provider_id` varchar(30) NULL COMMENT 'provider 고유 id',
+  `provider_id` varchar(100) NULL COMMENT 'provider 고유 id',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '등록일시',
   `updated_at` datetime NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '수정일시',
   PRIMARY KEY (`user_id`)
