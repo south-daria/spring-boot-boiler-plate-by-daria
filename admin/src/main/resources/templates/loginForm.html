@@ -8,11 +8,10 @@
     <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
     <script type="text/javascript" language="javascript">
-        function click_ajax(click_val) {
-            var url = click_val == "join" ? "/admin/v1/user" : "/login"
+        function join() {
             var data = {
                 "email": $("#email").val(),
-                "upwd": $("#pwd").val(),
+                "upwd": $("#password").val(),
                 "status": "ACTIVE",
                 "userRole": "USER",
                 "userProvider": "ITSELF"
@@ -21,11 +20,11 @@
             $.ajax({
                 type: "POST",
                 contentType: "application/json",
-                url: url,
+                url: "/admin/v1/user",
                 data: JSON.stringify(data),
                 dataType: "text",
                 success: function (data) {
-                    alert(click_val);
+                    alert('join');
                 }
 
             });
@@ -34,11 +33,12 @@
 
 </head>
 <body>
-
-email: <input id="email">
-pwd: <input id="pwd">
-<button id="join" onclick="click_ajax('join')">회원가입</button>
-<button id="login" onclick="click_ajax('login')">로그인</button>
+<form action = "/login" method="post">
+    email: <input id="email" name="email">
+    pwd: <input id="password" name="password">
+    <button id="join" onclick="join()">회원가입</button>
+    <button id="submit">로그인</button>
+</form>
 <a href="/oauth2/authorization/google">구글 로그인</a>
 
 </body>

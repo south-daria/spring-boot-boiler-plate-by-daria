@@ -35,10 +35,12 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User auth2User = super.loadUser(userRequest);
-        UserProvider provider = UserProvider.valueOf(userRequest.getClientRegistration().getClientId().toUpperCase());
+        String fullProvider = userRequest.getClientRegistration().getClientId();
+        UserProvider provider = fullProvider.contains("google") ? UserProvider.GOOGLE : UserProvider.UNKNOWN;
         String providerId = auth2User.getAttribute("sub");
         String email = auth2User.getAttribute("email");
         UserEntity userEntity = userService.getUser(email);
+        // 유저 데이터가 없을 경우 회원가입
         if (userEntity == null) {
             UserDTO userDTO = new UserDTO(
                     email,
@@ -49,8 +51,6 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
                     providerId
             );
             userService.createUser(userMapper.toEntity(userDTO));
-        } else {
-            throw new SilentApplicationErrorException(ApplicationErrorType.ALREADY_ACCOUNT);
         }
 
         return new PrincipleDetail(userEntity, auth2User.getAttributes());

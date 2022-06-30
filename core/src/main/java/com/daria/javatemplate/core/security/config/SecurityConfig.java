@@ -33,6 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/admin/v1/login")
                 .loginProcessingUrl("/login")
+                .usernameParameter("email")
                 .and()
                 .oauth2Login()
                 .loginPage("/admin/v1/login")
