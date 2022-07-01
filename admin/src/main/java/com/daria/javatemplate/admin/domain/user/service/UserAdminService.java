@@ -4,6 +4,7 @@ import com.daria.javatemplate.core.domain.user.model.dto.UserDTO;
 import com.daria.javatemplate.core.domain.user.model.entity.UserEntity;
 import com.daria.javatemplate.core.domain.user.model.mapper.UserMapper;
 import com.daria.javatemplate.core.domain.user.service.UserService;
+import com.daria.javatemplate.core.service.RedisCacheService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

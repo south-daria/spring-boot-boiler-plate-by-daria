@@ -21,6 +21,8 @@ public enum ApplicationErrorType {
     CLIENT_ABORT(HttpStatus.BAD_REQUEST, -10005, "try.again"),
     ALREADY_ACCOUNT(HttpStatus.BAD_REQUEST, -10006, "이미 가입된 이메일입니다. 일반 로그인해주세요"),
 
+    JSON_PARSING_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, -10007 , "json 파싱에 실패했습니다."),
+
     /**
      * Maintenance Mode (-99999)
      */
