@@ -1,0 +1,3 @@
+/** table : test.user **/
+-- INSERT INTO test.user (user_id, email, upwd, status, user_role, created_at, updated_at) VALUES (1,'test1@email.com','$2a$10$LafyKLETOREPaKeToizc/OXGng1rkgvA5Jq2J7rVL.7tgdGHrdPtm','ACTIVE','USER', now(), now());
+-- INSERT INTO test.user (user_id, email, upwd, status, user_role, created_at, updated_at) VALUES (2,'test2@email.com','$2a$10$LafyKLETOREPaKeToizc/OXGng1rkgvA5Jq2J7rVL.7tgdGHrdPtm','ACTIVE','USER', now(), now());

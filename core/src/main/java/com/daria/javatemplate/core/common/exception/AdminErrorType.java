@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 public enum AdminErrorType {
 
     DUPLICATE_DATA(HttpStatus.BAD_REQUEST, -10000, "중복되는 데이터가 있습니다."),
+    UNKNOWN_USER(HttpStatus.BAD_REQUEST, -10000, "없는 유저 데이터입니다."),
     ;
 
 

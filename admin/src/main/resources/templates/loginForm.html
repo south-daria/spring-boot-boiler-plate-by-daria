@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Login</title>
+
+    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+    <script type="text/javascript" language="javascript">
+        function join() {
+            var data = {
+                "email": $("#email").val(),
+                "upwd": $("#password").val(),
+                "status": "ACTIVE",
+                "userRole": "USER",
+                "userProvider": "ITSELF"
+            };
+            console.log(data);
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: "/admin/v1/user",
+                data: JSON.stringify(data),
+                dataType: "text",
+                success: function (data) {
+                    alert('join');
+                }
+
+            });
+        }
+    </script>
+
+</head>
+<body>
+<form action = "/login" method="post">
+    email: <input id="email" name="email">
+    pwd: <input id="password" name="password">
+    <button id="join" onclick="join()">회원가입</button>
+    <button id="submit">로그인</button>
+</form>
+<a href="/oauth2/authorization/google">구글 로그인</a>
+<a href="/oauth2/authorization/naver">naver 로그인</a>
+
+</body>
+</html>
+
+
