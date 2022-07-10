@@ -26,7 +26,10 @@ public enum ApplicationErrorType {
     /**
      * Maintenance Mode (-99999)
      */
-    MAINTENANCE_MODE_IS_ON(HttpStatus.SERVICE_UNAVAILABLE, -99999, "maintenance.mode");
+    MAINTENANCE_MODE_IS_ON(HttpStatus.SERVICE_UNAVAILABLE, -99999, "maintenance.mode"),
+    CANNOT_BE_DELETED(HttpStatus.INTERNAL_SERVER_ERROR, -10008, "지울 수 없습니다."),
+    FILE_DOWNLOAD_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, -10009, "파일을 다운로드 할 수 없습니다."),
+    FILE_UPLOAD_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, -10010, "파일을 업로드 할 수 없습니다.");
 
 
     @Getter

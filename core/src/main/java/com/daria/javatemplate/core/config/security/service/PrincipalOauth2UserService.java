@@ -1,7 +1,8 @@
-package com.daria.javatemplate.core.security.service;
+package com.daria.javatemplate.core.config.security.service;
 
 import com.daria.javatemplate.core.common.exception.AdminErrorType;
 import com.daria.javatemplate.core.common.exception.SilentAdminErrorException;
+import com.daria.javatemplate.core.config.security.config.PrincipleDetail;
 import com.daria.javatemplate.core.domain.user.model.dto.UserDTO;
 import com.daria.javatemplate.core.domain.user.model.entity.UserEntity;
 import com.daria.javatemplate.core.domain.user.model.mapper.UserMapper;
@@ -9,7 +10,6 @@ import com.daria.javatemplate.core.domain.user.service.UserService;
 import com.daria.javatemplate.core.domain.user.type.UserProvider;
 import com.daria.javatemplate.core.domain.user.type.UserRole;
 import com.daria.javatemplate.core.domain.user.type.UserStatus;
-import com.daria.javatemplate.core.security.config.PrincipleDetail;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;

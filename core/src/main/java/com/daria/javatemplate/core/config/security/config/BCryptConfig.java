@@ -1,4 +1,4 @@
-package com.daria.javatemplate.core.security.config;
+package com.daria.javatemplate.core.config.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
