@@ -2,7 +2,7 @@ package com.daria.javatemplate.core.common.service;
 
 import com.daria.javatemplate.core.common.exception.AdminErrorType;
 import com.daria.javatemplate.core.common.exception.SilentAdminErrorException;
-import com.daria.javatemplate.core.security.config.PrincipleDetail;
+import com.daria.javatemplate.core.config.security.config.PrincipleDetail;
 import com.daria.javatemplate.core.domain.user.model.entity.UserEntity;
 import com.daria.javatemplate.core.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

@@ -1,13 +1,10 @@
 package com.daria.javatemplate.admin.domain.view.controller;
 
-import com.daria.javatemplate.core.common.exception.ApplicationErrorException;
-import com.daria.javatemplate.core.common.exception.ApplicationErrorType;
 import com.daria.javatemplate.core.common.model.entity.CacheKeyEntity;
 import com.daria.javatemplate.core.common.model.type.CacheType;
-import com.daria.javatemplate.core.security.config.PrincipleDetail;
+import com.daria.javatemplate.core.config.security.config.PrincipleDetail;
 import com.daria.javatemplate.core.service.RedisCacheService;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.authenticator.SpnegoAuthenticator;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;

@@ -1,4 +1,4 @@
-package com.daria.javatemplate.core.security.config;
+package com.daria.javatemplate.core.config.security.config;
 
 import com.daria.javatemplate.core.domain.user.model.entity.UserEntity;
 import lombok.AllArgsConstructor;

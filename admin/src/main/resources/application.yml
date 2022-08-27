@@ -58,3 +58,26 @@ server:
     min-spare-threads: 50
     accept-count: 50
     uri-encoding: UTF-8
+
+## AWS Setting
+aws:
+  s3:
+    key:
+      access: <access token>
+      secret: <secret access token>
+    client:
+      region: ap-northeast-2
+    bucket:
+      name: bucket_name
+    image:
+      url:
+        prefix: cdn-prefix
+    upload:
+      path.directory: directory
+
+## FeignClient
+feign-client:
+  host: <host>
+  path:
+    example: <path>
+  api-key: <api-key>

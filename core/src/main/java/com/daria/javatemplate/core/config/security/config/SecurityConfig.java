@@ -1,16 +1,13 @@
-package com.daria.javatemplate.core.security.config;
+package com.daria.javatemplate.core.config.security.config;
 
 import com.daria.javatemplate.core.domain.user.type.UserRole;
-import com.daria.javatemplate.core.security.service.PrincipalOauth2UserService;
+import com.daria.javatemplate.core.config.security.service.PrincipalOauth2UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity //spring security filter가 filterChain에 등록
