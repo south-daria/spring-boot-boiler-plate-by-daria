@@ -74,3 +74,10 @@ aws:
         prefix: cdn-prefix
     upload:
       path.directory: directory
+
+## FeignClient
+feign-client:
+  host: <host>
+  path:
+    example: <path>
+  api-key: <api-key>
