@@ -22,6 +22,12 @@ DB 형상관리를 위한 flyway 도입
 
 ### redis cache 구성
 
+### Spring Scheduler 샘플 구성
+
+### Spring Inteceptor 샘플 구성
+
+### Spring FerignClient 샘플 구성(HTTP 통신을 위한 Client)
+
 ###도입 예정
 - aws s3 
 - kafka
