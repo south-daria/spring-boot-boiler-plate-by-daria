@@ -4,6 +4,8 @@ import com.daria.javatemplate.core.common.model.entity.BaseTimeEntity;
 import com.daria.javatemplate.core.domain.user.type.UserProvider;
 import com.daria.javatemplate.core.domain.user.type.UserRole;
 import com.daria.javatemplate.core.domain.user.type.UserStatus;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicUpdate;
@@ -14,6 +16,8 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Entity
+@Builder
+@AllArgsConstructor
 @DynamicUpdate
 @Table(name = "user")
 public class UserEntity extends BaseTimeEntity implements Serializable {

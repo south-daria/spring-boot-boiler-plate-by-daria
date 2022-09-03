@@ -1,6 +1,8 @@
 package com.daria.javatemplate.admin.domain.user.controller;
 
+import com.daria.javatemplate.admin.domain.user.model.dto.UserAdminDTO.UserLoginRequest;
 import com.daria.javatemplate.admin.domain.user.service.UserAdminService;
+import com.daria.javatemplate.core.config.security.jwt.token.JwtToken;
 import com.daria.javatemplate.core.domain.user.model.dto.UserDTO;
 import com.daria.javatemplate.core.domain.user.model.entity.UserEntity;
 import com.daria.javatemplate.core.domain.user.model.mapper.UserMapper;
@@ -45,6 +47,13 @@ public class UserController {
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<String> deleteSample(@PathVariable Long id) {
         return ResponseEntity.ok("delete okay" + id);
+    }
+
+    @PostMapping(path = "/login")
+    public JwtToken login(
+            @RequestBody UserLoginRequest userLoginRequest
+            ){
+        return userService.login(userLoginRequest);
     }
 
 }

@@ -2,6 +2,7 @@ package com.daria.javatemplate.core.domain.user.service;
 
 import com.daria.javatemplate.core.domain.user.model.entity.UserEntity;
 import com.daria.javatemplate.core.domain.user.repository.UserRepository;
+import com.daria.javatemplate.core.domain.user.type.UserProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
@@ -20,7 +21,7 @@ public class UserService {
         return userRepository.save(userEntity);
     }
 
-    public UserEntity getUser(String email) {
-        return userRepository.findByEmail(email).orElse(null);
+    public UserEntity getUser(UserProvider provider, String providerId) {
+        return userRepository.findByProviderAndProviderId(provider, providerId).orElse(null);
     }
 }

@@ -29,7 +29,8 @@ public enum ApplicationErrorType {
     MAINTENANCE_MODE_IS_ON(HttpStatus.SERVICE_UNAVAILABLE, -99999, "maintenance.mode"),
     CANNOT_BE_DELETED(HttpStatus.INTERNAL_SERVER_ERROR, -10008, "지울 수 없습니다."),
     FILE_DOWNLOAD_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, -10009, "파일을 다운로드 할 수 없습니다."),
-    FILE_UPLOAD_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, -10010, "파일을 업로드 할 수 없습니다.");
+    FILE_UPLOAD_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, -10010, "파일을 업로드 할 수 없습니다."),
+    INACTIVE_USER(HttpStatus.BAD_REQUEST, -101010, "탈퇴한 회원입니다.");
 
 
     @Getter

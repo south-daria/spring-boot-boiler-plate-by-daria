@@ -56,7 +56,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
             throw new SilentAdminErrorException(AdminErrorType.UNKNOWN_USER);
         }
 
-        UserEntity userEntity = userService.getUser(email);
+        UserEntity userEntity = userService.getUser(userLoginRequest.getProvider(), email);
         // 유저 데이터가 없을 경우 회원가입
         if (userEntity == null) {
             UserDTO userDTO = new UserDTO(
